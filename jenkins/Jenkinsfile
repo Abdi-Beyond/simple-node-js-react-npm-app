@@ -1,10 +1,12 @@
 pipeline {
-agent {
+    agent {
         docker {
-            image 'node:14'
-            label 'docker-agent'  // optional, depending on Jenkins setup
+            image 'node:18'
+            label 'docker-agent'
+            args '-p 3000:3000'
         }
     }
+
     environment {
         CI = 'true'
     }
