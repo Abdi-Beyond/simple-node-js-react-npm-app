@@ -7,5 +7,6 @@ docker { image 'node:18'
 stages{
 stage('builder'){
 steps{
+sh 'sh 'docker --version'
 sh 'node --version'
 }}}}
