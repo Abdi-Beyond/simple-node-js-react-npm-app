@@ -4,12 +4,9 @@ pipeline {
     }
     stages {
         stage('builder') {
-            agent {
-                docker {
-                    image 'node:alpine3.21'
-                }
-            }
+            
             steps {
+                sh 'docker pull node'
                 sh 'node --version'
             }
         }
