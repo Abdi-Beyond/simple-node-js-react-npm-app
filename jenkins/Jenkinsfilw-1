@@ -8,7 +8,6 @@ pipeline {
     stages {
         stage('builder') {
             steps {
-                sh 'docker --version'  // First command to check Docker version
                 sh 'node --version'    // Second command to check Node.js version
             }
         }
