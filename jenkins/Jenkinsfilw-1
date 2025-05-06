@@ -1,14 +1,16 @@
 pipeline {
     agent {
-        docker {
-            image 'node:alpine3.21'
-
-        }
+        label 'docker-agent'
     }
     stages {
         stage('builder') {
+            agent {
+                docker {
+                    image 'node:alpine3.21'
+                }
+            }
             steps {
-                sh 'node --version'    // Second command to check Node.js version
+                sh 'node --version'
             }
         }
     }
