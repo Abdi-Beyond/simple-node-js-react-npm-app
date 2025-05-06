@@ -1,6 +1,8 @@
 pipeline {
  agent {
-docker { image 'node'}
+docker { image 'node:18'
+    label 'docker-agent'}
+
 }
 stages{
 stage('builder'){
