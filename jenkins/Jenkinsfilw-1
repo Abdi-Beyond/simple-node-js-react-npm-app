@@ -1,12 +1,16 @@
 pipeline {
- agent {
-docker { image 'node:18'
-    label 'docker-agent'}
-
+    agent {
+        docker {
+            image 'node:18'
+            label 'docker-agent'
+        }
+    }
+    stages {
+        stage('builder') {
+            steps {
+                sh 'docker --version'  // First command to check Docker version
+                sh 'node --version'    // Second command to check Node.js version
+            }
+        }
+    }
 }
-stages{
-stage('builder'){
-steps{
-sh 'sh 'docker --version'
-sh 'node --version'
-}}}}
