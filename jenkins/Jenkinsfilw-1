@@ -1,13 +1,39 @@
 pipeline {
     agent {
-        label 'docker-agent'
+        docker {
+            image 'docker:latest'  // Docker-in-Docker client
+            args '-v /var/run/docker.sock:/var/run/docker.sock'
+        }
     }
+
+    environment {
+        IMAGE_NAME = 'my-node-app'
+        CONTAINER_NAME = 'node-app-live'
+    }
+
     stages {
-        stage('builder') {
-            
+        stage('Build Image') {
             steps {
-                sh 'docker pull node'
-                sh 'node --version'
+                script {
+                    sh 'docker build -t $IMAGE_NAME .'
+                }
+            }
+        }
+
+        stage('Deploy Container') {
+            steps {
+                script {
+                    // Stop old container if it exists
+                    sh 'docker rm -f $CONTAINER_NAME || true'
+
+                    // Run new container detached, on host Docker
+                    sh '''
+                        docker run -d \
+                        --name $CONTAINER_NAME \
+                        -p 3000:3000 \
+                        $IMAGE_NAME
+                    '''
+                }
             }
         }
     }
