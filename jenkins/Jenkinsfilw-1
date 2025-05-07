@@ -12,7 +12,7 @@ pipeline {
     }
 
     stages {
-        stage('Build Image') {
+        stage('Building image') {
             steps {
                 script {
                     sh 'docker build -t $IMAGE_NAME .'
@@ -20,7 +20,7 @@ pipeline {
             }
         }
 
-        stage('Deploy Container') {
+        stage('Deploying Container') {
             steps {
                 script {
                     // Stop old container if it exists
