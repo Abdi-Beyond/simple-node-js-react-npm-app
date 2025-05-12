@@ -8,7 +8,7 @@ pipeline {
 
     environment {
         IMAGE_NAME = 'my-node-app'
-        CONTAINER_NAME = 'node-app-live'
+        CONTAINER_NAME = 'node-app-live2'
     }
 
     stages {
